@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { listItem } from '../components/ListItem'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -27,19 +27,7 @@ export default class HomeScreen extends React.Component {
         <FlatList
           data={this.props.screenProps.events}
           keyExtractor={item => '' + item.id}
-          renderItem={({item}) => (
-            <View key={item.id} style={styles.eventRow}>
-              <View style={{flex: 1}}>
-                <Text style={styles.eventTitle}>{item.event}</Text>
-                <Text style={styles.eventSubtitle}>{item.time}</Text>
-              </View>
-              <View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Event', { event: item })}>
-                  <Entypo name="chevron-right" size={26} color="white" />
-                </TouchableOpacity>
-              </View>
-            </View>
-          )}
+          renderItem={listItem(this.props.navigation)}
         />
       </View>
     );
@@ -61,22 +49,5 @@ const styles = StyleSheet.create({
     fontSize: 30,
     alignSelf: 'center',
     fontWeight: 'bold',
-  },
-  eventRow: {
-    height: 60,
-    backgroundColor: 'black',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-  },
-  eventTitle: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: 'bold'
-  },
-  eventSubtitle: {
-    color: 'white',
-    fontSize: 12,
   }
 });

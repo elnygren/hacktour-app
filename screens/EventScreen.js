@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TouchableOpacity
 } from 'react-native'
 import { Entypo } from '@expo/vector-icons';
@@ -21,7 +22,9 @@ export default class EventScreen extends React.Component {
       },
       headerTintColor: 'white',
       headerRight: (
-        <TouchableOpacity onPress={() => navigation.getParam('toggleMyEvent')(navigation.getParam('event'))}>
+        <TouchableOpacity
+          style={{paddingRight: 10}}
+          onPress={() => navigation.getParam('toggleMyEvent')(navigation.getParam('event'))}>
           <Entypo name={navigation.getParam('isFavored') ? 'heart' : 'heart-outlined'} color="white" size={26}/>
         </TouchableOpacity>
       ),
@@ -52,7 +55,7 @@ export default class EventScreen extends React.Component {
     const { navigation } = this.props;
     const event = navigation.getParam('event');
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View>
           <Image
             source={{ uri: event.coverPhoto }}
@@ -64,7 +67,7 @@ export default class EventScreen extends React.Component {
           <Text style={styles.normal}>{event.address}</Text>
           <Text style={styles.normal}>{event.address2}</Text>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
